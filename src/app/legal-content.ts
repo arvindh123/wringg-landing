@@ -234,7 +234,7 @@ export const legalPages: Record<string, LegalPageContent> = {
         "heading": "What happens next",
         "body": [
           "Once the app records a request, new bookings or partner assignments are blocked. Access may remain temporarily so you can complete existing service, payment or dispute responsibilities.",
-          "Active orders, unpaid amounts, unresolved complaints or refunds, payment exceptions, and unsettled partner earnings or payouts can delay closure. Account requests currently need support follow-up before completion while automatic processing is being finalized. Contact support for your request status, an expected timeframe and confirmation when processing finishes.",
+          "Active orders, unpaid amounts, unresolved complaints or refunds, payment exceptions, and unsettled partner earnings or payouts can delay closure. Eligible in-app requests are checked automatically for core account cleanup. Contact support if a request remains pending, for an expected timeframe, or for a separate review of retained records and provider-held copies.",
           "We do not promise deletion within seven business days. Uninstalling the app, logging out, sending an email or seeing a pending request does not mean deletion is complete. Account closure cannot be undone once eligible information has been erased."
         ]
       },
