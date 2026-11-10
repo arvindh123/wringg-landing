@@ -1,5 +1,14 @@
 # Privacy and deletion page rollout
 
+## Production follow-up — November 10, 2026
+
+The production account-deletion worker now has its protected job token and matching Vault origin/token settings. A live test first verified that no real deletion requests were queued, then created and deleted one owned temporary account. The request completed, ordinary profile contact details were cleared, and both the old access token and direct database access were denied. The queue was empty afterward.
+
+The deletion notice now states that eligible in-app requests are checked automatically for core cleanup. Retained financial, order, audit and verification records and provider-held copies still require the handling described in the notices. The separate raw-analytics cleanup remains paused.
+
+The updated website production build and static export passed. Website publication requires merging this PR and deploying through the repository workflow; the public website has not been changed. The earlier missing-worker-settings notes below describe the state before this follow-up.
+
+
 Updated 10 November 2026. These pages correct misleading notices and describe current behavior. Publishing a truthful notice is separate from satisfying every app-store privacy/deletion release requirement.
 
 ## Changes
