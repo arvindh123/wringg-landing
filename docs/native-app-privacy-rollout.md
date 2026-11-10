@@ -1,31 +1,29 @@
-# Native-app privacy and deletion notice rollout
+# Privacy and deletion page rollout
 
-Draft prepared 30 October 2026 against landing main 0407a91. Do not merge/deploy before backend and app verification.
+Updated 10 November 2026. These pages correct misleading notices and describe current behavior. Publishing a truthful notice is separate from satisfying every app-store privacy/deletion release requirement.
 
-## What changes
+## Changes
 
-The existing privacy notice describes only a May 2026 pilot. The proposed privacy copy adds actual account/order, foreground location, verification/Didit, private proof, payout, token, referral and optional analytics flows. The deletion page reuses the existing LegalPage component and contact details verified from /contact. It removes the unsupported seven-business-day promise and the promise that all order history is erased.
+- Distinguish customer bookings from partner Didit verification, photos and payouts. Cover location, tokens, technical/provider processing, support, referrals and consented interactions.
+- Use the shared legal template, confirmed support email and prominent deletion-request action. Users without the app can request deletion without reinstalling it.
+- Remove the guaranteed seven-business-day completion and order-history erasure promises. Explain blockers, core cleanup, pseudonymous references, retained records and provider limits.
+- Report production growth enabled and external analytics export disabled. The raw 90-day cleanup cron is paused. Deletion dispatch is missing required Vault settings, so the notice requests support follow-up while automation is finalized.
+- Add accessible privacy/deletion navigation and clickable contact links. Terms/refund/shipping/contact body copy is unchanged.
+- Add `store-privacy-disclosures.md` with separate customer Apple/customer Play/partner Play mappings, support handling and exact outstanding evidence. No secrets or personal production records are included.
 
-## Required evidence before publication
+## Validation
 
-- Integrate and deploy the washmate account-request-deletion/account-delete-worker lifecycle; verify pending, deferred, processing and completed states on actual disposable Auth users. Completion requires core cleanup and confirmed Auth closure.
-- Test in-app initiation and status in both exact store candidates; retain the public support route for older versions and inaccessible accounts.
-- Decide appropriate limits and deletion/review handling for proof photos, verification documents, fraud/business/audit records and provider-held data. Current backend draft preserves them with no automatic expiry; the notice says so and does not invent a legal mandate. This remains a store/privacy release gate.
-- Resolve the product document that locks partner documents to permanent retention; any change requires an explicit product decision and implementation, not a copy-only promise.
-- Verify configured 90-day raw-event cleanup and actual production optional-analytics flags. Root reports collection/export currently disabled. Do not enable analytics without checking app consent, provider payloads, exports and updated disclosures.
-- Confirm support handles deletion/provider review and identity verification, without collecting unnecessary documents or OTPs by email. No processing SLA is invented.
-- Review current Apple/Play disclosures against the exact native SDK and runtime setup. These pages do not fill the questionnaires or establish compliance.
+- Read repository AGENTS and the installed Next 16.2.6 metadata/static-export guidance.
+- ESLint and production static build passed, including TypeScript and all public routes.
+- Local Cloudflare Worker preview served the export. Checked privacy/deletion navigation and desktop/390-pixel phone layouts. Email action targets the existing support address with a deletion subject and minimum fields; no email was sent.
+- Production read-only checks: empty deletion queue; active deletion cron but missing dispatch Vault names; growth enabled/export disabled; raw retention cron inactive and zero raw rows older than 90 days.
+- Publication requires Cloudflare access and live verification of the 10 November pages. No deployment or store submission is claimed by this source update.
 
-## Validation actually performed
+## Remaining app-release requirements
 
-- Read current repository AGENTS/README and existing legal content/rendering. Preserved existing LegalPage API, static Next Metadata pattern and website palette.
-- Retrieved live /privacy, /terms, /delete-account and /contact. /contact lists hello@wringg.in and +91 84385 08211.
-- Coordinated deletion semantics with the backend agent; no backend deployment or completed real-account deletion is claimed.
-- Executor became unavailable before local lint/typecheck/build/render could run. Those checks remain required. No screenshot, store submission, merge or live website deployment occurred.
+1. Configure and test the deletion processor end-to-end on an owned disposable Auth identity, including Auth closure and old-token denial. Do not erase real customer/partner or store-reviewer accounts.
+2. Resolve indefinite retained categories and the locked permanent partner-document policy; implement a defensible retention/review and provider-deletion process.
+3. Inspect final native SDKs/manifests/runtime and complete separate questionnaires. Apple migration blocks the signed customer iOS candidate; Android Firebase client/push evidence is separate.
+4. Obtain specific approval before enabling the paused irreversible 90-day raw-data cleanup. Automatic review rejected activation; no change was applied.
 
-## Sources
-
-- washmate docs/product/defaults-locking.md; docs/engineering/launch-growth-runbook.md; proposed 20261030040000_account_deletion.sql and accountDeletion.ts (agent design, pending direct final-code verification).
-- https://developer.apple.com/help/app-review/guideline-reference/5-1-1-account-deletion
-- https://developer.apple.com/app-store/app-privacy-details/
-- https://nextjs.org/docs/app/api-reference/functions/generate-metadata
+See `store-privacy-disclosures.md` for current state, sources and operational details.
