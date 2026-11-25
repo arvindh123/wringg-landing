@@ -18,6 +18,9 @@ test("approved marketing pages ship without preview-host or stale Next hydration
     const html = read(route);
     assert.match(html, /<title>[^<]+<\/title>/, route);
     assert.doesNotMatch(html, /chatgpt\.site|127\.0\.0\.1|self\.__next_f|<script[^>]+src="\/_next\//, route);
+    assert.doesNotMatch(html, /<meta\b[^>]*\bname=["'](?:robots|googlebot)["'][^>]*\bcontent=["'][^"']*(?:noindex|nofollow|none)/i, `${route}: production pages must allow indexing`);
+    const canonical = `https://wringg.in/${route.replace(/index\.html$/, "")}`;
+    assert.ok(html.includes(`<link rel="canonical" href="${canonical}">`), `${route}: production canonical URL`);
     assert.match(html, /wringg-logo-original-v13\.svg/, route);
     assert.doesNotMatch(html, /918438508211|84385\s*08211/, route);
   }
